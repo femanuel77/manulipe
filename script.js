@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackConfig = {
       title: "Religião",
       artist: "Jão",
-      audioSrc: "religião.mp3", // Ex: "minha-musica.mp3"
+      audioSrc: "religiao.mp3", // Ex: "minha-musica.mp3"
       artSrc: "https://i.scdn.co/image/ab67616d0000b27309db791ec9bc25a6b4151588" // Link para a imagem da capa
     };
     // ----------------------------------------------------------------
