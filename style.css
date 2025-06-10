@@ -1,0 +1,280 @@
+/* --- RESET BÁSICO E ESTILOS GLOBAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --cor-fundo: #121212;
+    --cor-texto: #f0f0f0;
+    --cor-destaque: #e0c58a; /* Um dourado suave */
+    --fonte-titulos: 'Playfair Display', serif;
+    --fonte-corpo: 'Lato', sans-serif;
+  }
+  
+  body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    overflow-x: hidden;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+  
+  h2 {
+    font-family: var(--fonte-titulos);
+    font-size: 3rem;
+    color: var(--cor-destaque);
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  /* --- SEÇÃO 1: HERO & CONTADOR --- */
+  .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 1)), url('https://via.placeholder.com/1920x1080/333333/000000?text=Fundo+Abstrato') no-repeat center center/cover;
+  }
+  
+  .hero-content h1 {
+    font-family: var(--fonte-titulos);
+    font-size: 4rem;
+    color: var(--cor-destaque);
+    margin-bottom: 40px;
+  }
+  
+  #contador {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .tempo-unidade {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 120px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(224, 197, 138, 0.2);
+  }
+  
+  .tempo-unidade span {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+  
+  .tempo-unidade label {
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* --- SEÇÃO 2: GALERIA DE FOTOS --- */
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .foto-item {
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .foto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  
+  .foto-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* --- SEÇÃO 3: SPOTIFY --- */
+  .spotify-embed {
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .spotify-embed iframe {
+    border-radius: 12px;
+    width: 100%;
+    /* A ALTURA FOI REMOVIDA DAQUI PARA PERMITIR O MODO COMPACTO */
+  }
+  
+  /* --- SEÇÃO 4: PLAYER ESTILO SPOTIFY --- */
+  .player-spotify-style {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #181818;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  .player-corpo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .album-art {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .player-ui {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .track-info {
+    margin-bottom: 16px;
+  }
+  
+  .track-info h3 {
+    font-family: var(--fonte-corpo);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+  
+  .track-info p {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+  }
+  
+  .player-timeline {
+    width: 100%;
+  }
+  
+  .progress-bar-container {
+    background-color: #535353;
+    height: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  #progress-bar {
+    background-color: var(--cor-destaque);
+    width: 0%;
+    height: 100%;
+    border-radius: 2px;
+  }
+  
+  .time-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    margin-top: 8px;
+  }
+  
+  .player-controles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .control-btn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .control-btn:hover {
+    color: var(--cor-texto);
+  }
+  .control-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Encontre esta regra e substitua-a */
+.play-btn {
+    /* MUDANÇA AQUI: Cor igual aos outros botões */
+    color: #b3b3b3; 
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+  }
+  
+  .play-btn:hover {
+    color: var(--cor-texto);
+    transform: scale(1.1);
+  }
+  /* Estilo para arredondar todos os ícones do player */
+.control-btn svg path {
+    fill: none; /* Remove o preenchimento */
+    stroke: currentColor; /* Usa a cor do texto (definida no botão) como contorno */
+    stroke-width: 2; /* Espessura do contorno */
+    stroke-linecap: round; /* Arredonda as pontas das linhas */
+    stroke-linejoin: round; /* Arredonda as junções das linhas */
+  }
+  
+  /* --- RODAPÉ --- */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-weight: 300;
+  }
+  
+  /* --- RESPONSIVIDADE --- */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2.5rem;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+    }
+    .tempo-unidade {
+      min-width: 90px;
+      padding: 15px;
+    }
+    .tempo-unidade span {
+      font-size: 2.2rem;
+    }
+    .container {
+      padding: 60px 20px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .player-corpo {
+      flex-direction: column;
+      text-align: center;
+    }
+    .track-info {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+  }
