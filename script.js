@@ -1,6 +1,7 @@
+// VERSÃO DE DIAGNÓSTICO
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- LÓGICA DO CONTADOR ---
+  // --- LÓGICA DO CONTADOR (sem alterações) ---
   const dataInicio = new Date('2024-07-08T16:30:00');
   const spanAnos = document.getElementById('anos');
   const spanMeses = document.getElementById('meses');
@@ -38,12 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(atualizarContador, 1000);
   atualizarContador();
 
-  // --- LÓGICA DO PLAYER DE MÚSICA ---
+  // --- LÓGICA DO PLAYER DE MÚSICA (sem alterações) ---
   const trackConfig = {
     title: "Religião",
     artist: "Jão",
+    // VOLTEI PARA O CAMINHO LOCAL, MAS PODE USAR O DE TESTE SE QUISER
     audioSrc: "religiao.mp3",
-    artSrc: "https://i.scdn.co/image/ab67616d0000b27309db791ec9bc25a6b4151588"
+    artSrc: "https://i.scdn.co/image/ab67616d00001e0209db791ec9bc25a6b4151588"
   };
 
   const musica = document.getElementById('musica-player');
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadTrack(track) {
     trackTitleEl.textContent = track.title;
     trackArtistEl.textContent = track.artist;
-    audio.src = track.audioSrc;
+    musica.src = track.audioSrc;
     albumArtEl.src = track.artSrc;
   }
 
@@ -84,20 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateProgress() {
-    const { duration, currentTime } = audio;
-    if (duration) {
-      const progressPercent = (currentTime / duration) * 100;
+    if (musica.duration) {
+      const progressPercent = (musica.currentTime / musica.duration) * 100;
       progressBar.style.width = `${progressPercent}%`;
-      currentTimeEl.textContent = formatTime(currentTime);
+      currentTimeEl.textContent = formatTime(musica.currentTime);
     }
   }
   
   function setProgress(e) {
-    const width = this.clientWidth;
-    const clickX = e.offsetX;
-    const duration = musica.duration;
-    if(duration) {
-      musica.currentTime = (clickX / width) * duration;
+    if(musica.duration) {
+      musica.currentTime = (e.offsetX / this.clientWidth) * musica.duration;
     }
   }
   
@@ -116,17 +114,31 @@ document.addEventListener('DOMContentLoaded', () => {
   
   loadTrack(trackConfig);
 
-  // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
+  // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO DE DIAGNÓSTICO) ---
   const revealBtn = document.getElementById('reveal-player-btn');
   const playerWrapper = document.getElementById('player-wrapper');
 
   if(revealBtn && playerWrapper && musica) {
     revealBtn.addEventListener('click', () => {
-      if (musica.paused) {
-        musica.play();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
+      console.log("Botão de revelação clicado. Tentando tocar a música...");
+      
+      // Tentativa de tocar a música e "escutar" a resposta
+      const playPromise = musica.play();
+
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          // SUCESSO: O navegador permitiu.
+          console.log("SUCESSO: O navegador permitiu a reprodução.");
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+        }).catch(error => {
+          // FALHA: O navegador bloqueou.
+          console.error("FALHA: O navegador bloqueou a reprodução automática. Erro:", error);
+          alert("Parece que o navegador bloqueou a música de tocar automaticamente. Por favor, clique no botão play do player para começar.");
+        });
       }
+
+      // A animação visual acontece independentemente do sucesso do áudio
       playerWrapper.classList.add('revealed');
       revealBtn.style.transition = 'opacity 0.3s ease';
       revealBtn.style.opacity = '0';

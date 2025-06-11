@@ -247,7 +247,7 @@ h2 {
 .control-btn svg { width: 24px; height: 24px; }
 .control-btn svg path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-.play-btn { color: #b3b3b3; width: 48px; height: 48px; }
+.play-btn { color: #b3b3b3; width: 24px; height: 24px; }
 .play-btn:hover { color: var(--cor-texto); transform: scale(1.1); }
 
 /* --- RODAPÉ --- */
