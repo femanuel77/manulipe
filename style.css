@@ -61,7 +61,7 @@ h2 {
 
 /* --- SEÇÃO HERO & CONTADOR --- */
 .hero {
-  height: 90vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@ h2 {
   font-family: var(--fonte-titulos);
   font-size: 4rem;
   color: var(--cor-destaque);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 #contador {
@@ -256,7 +256,7 @@ footer { text-align: center; padding: 40px 20px; font-weight: 300; }
 /* --- RESPONSIVIDADE --- */
 @media (min-width: 769px) {
   body::before {
-    background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2072&auto=format&fit=crop');
+    background-image: url('https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?cs=srgb&dl=pexels-philippedonn-1169754.jpg&fm=jpg');
   }
 }
 
