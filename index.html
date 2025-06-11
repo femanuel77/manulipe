@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nossa História no Tempo</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,30 +15,12 @@
     <div class="hero-content">
       <h1>Nossa História no Tempo</h1>
       <div id="contador">
-        <div class="tempo-unidade">
-          <span id="anos">0</span>
-          <label>Anos</label>
-        </div>
-        <div class="tempo-unidade">
-          <span id="meses">0</span>
-          <label>Meses</label>
-        </div>
-        <div class="tempo-unidade">
-          <span id="dias">0</span>
-          <label>Dias</label>
-        </div>
-        <div class="tempo-unidade">
-          <span id="horas">0</span>
-          <label>Horas</label>
-        </div>
-        <div class="tempo-unidade">
-          <span id="minutos">0</span>
-          <label>Minutos</label>
-        </div>
-        <div class="tempo-unidade">
-          <span id="segundos">0</span>
-          <label>Segundos</label>
-        </div>
+        <div class="tempo-unidade"><span id="anos">0</span><label>Anos</label></div>
+        <div class="tempo-unidade"><span id="meses">0</span><label>Meses</label></div>
+        <div class="tempo-unidade"><span id="dias">0</span><label>Dias</label></div>
+        <div class="tempo-unidade"><span id="horas">0</span><label>Horas</label></div>
+        <div class="tempo-unidade"><span id="minutos">0</span><label>Minutos</label></div>
+        <div class="tempo-unidade"><span id="segundos">0</span><label>Segundos</label></div>
       </div>
     </div>
   </header>
@@ -48,55 +28,64 @@
   <main>
     <section id="galeria" class="container">
       <h2>Nossas Memórias</h2>
+      <p class="section-description">
+        Aqui ficam as memórias que construímos, os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história.
+      </p>
       <div class="galeria-grid">
-        <div class="foto-item"><img src="https://lh3.googleusercontent.com/pw/AP1GczNg-Zbuw4YnLmb3TJHfp87-qMAhctjS3tgUh4BieJkE5sWJ-Iyhg5msVfKTKIKxY7pCPl5Tc5r0yEua5v_U2apiZ_VBQ1nlOtmyyb0PFr8e7KFdOQ1P270zdtND5C96Pkb6WS9tsDblCyQKeuKueeiY=w689-h919-s-no-gm?authuser=0" alt="Descrição da foto 1"></div>
+        <div class="foto-item"><img src="https://via.placeholder.com/400x500/cccccc/000000?text=Foto+1" alt="Descrição da foto 1"></div>
         <div class="foto-item"><img src="https://via.placeholder.com/400x400/cccccc/000000?text=Foto+2" alt="Descrição da foto 2"></div>
         <div class="foto-item"><img src="https://via.placeholder.com/400x600/cccccc/000000?text=Foto+3" alt="Descrição da foto 3"></div>
-        <div class="foto-item"><img src="https://via.placeholder.com/400x450/cccccc/000000?text=Foto+4" alt="Descrição da foto 4"></div>
-        <div class="foto-item"><img src="https://via.placeholder.com/400x550/cccccc/000000?text=Foto+5" alt="Descrição da foto 5"></div>
-        <div class="foto-item"><img src="https://via.placeholder.com/400x400/cccccc/000000?text=Foto+6" alt="Descrição da foto 6"></div>
       </div>
     </section>
 
     <section id="playlist" class="container">
       <h2>Nossa Trilha Sonora</h2>
+      <p class="section-description">
+        As músicas que marcaram nossos momentos, que embalaram nossas viagens e que se tornaram a trilha sonora oficial do nosso amor.
+      </p>
       <div class="spotify-embed">
-        <p style="text-align: center;"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rdmS5nXG1f1f02IhFUmDR?utm_source=generator&theme=0" width="60%" height="300" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+        <p style="text-align: center;"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rdmS5nXG1f1f02IhFUmDR?utm_source=generator&theme=0" width="90%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
       </div>
     </section>
 
     <section id="nosso-som" class="container">
       <h2>Nossa Música</h2>
-      <div class="player-spotify-style">
-        <audio id="musica-player"></audio>
-        <div class="player-corpo">
-          <img src="https://i.scdn.co/image/ab67616d0000b27309db791ec9bc25a6b4151588" alt="Capa do Álbum" class="album-art">
-          <div class="player-ui">
-            <div class="track-info">
-              <h3 id="track-title">Religião</h3>
-              <p id="track-artist">Jão</p>
-            </div>
-            <div class="player-timeline">
-              <div class="progress-bar-container">
-                <div id="progress-bar"></div>
+      <p class="section-description">
+        Aquela música especial. A que toca e imediatamente nos transporta para um momento só nosso.
+      </p>
+      <div class="reveal-button-container">
+        <button id="reveal-player-btn" class="reveal-player-button">
+          <svg viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
+        </button>
+      </div>
+      <div id="player-wrapper" class="player-wrapper">
+        <div class="player-spotify-style">
+          <audio id="musica-player"></audio>
+          <div class="player-corpo">
+            <img src="https://via.placeholder.com/300x300/1e1e1e/fff?text=Capa" alt="Capa do Álbum" class="album-art">
+            <div class="player-ui">
+              <div class="track-info">
+                <h3 id="track-title">Religião</h3>
+                <p id="track-artist">Jão</p>
               </div>
-              <div class="time-display">
-                <span id="current-time">0:00</span>
-                <span id="total-duration">0:00</span>
+              <div class="player-timeline">
+                <div class="progress-bar-container">
+                  <div id="progress-bar"></div>
+                </div>
+                <div class="time-display">
+                  <span id="current-time">0:00</span>
+                  <span id="total-duration">0:00</span>
+                </div>
               </div>
-            </div>
-            <div class="player-controles">
-                <button id="prev-btn" class="control-btn">
-                  <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
-                </button>
+              <div class="player-controles">
+                <button id="prev-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
                 <button id="play-pause-btn" class="control-btn play-btn">
                   <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
                   <svg id="pause-icon" style="display: none;" viewBox="0 0 24 24"><path d="M9 5 V19 M15 5 V19"></path></svg>
                 </button>
-                <button id="next-btn" class="control-btn">
-                  <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6z"></path></svg>
-                </button>
+                <button id="next-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6z"></path></svg></button>
               </div>
+            </div>
           </div>
         </div>
       </div>
