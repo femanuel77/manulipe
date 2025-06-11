@@ -146,43 +146,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { once: true });
   }
 });
-/* ADICIONE ESTE NOVO BLOCO NO FINAL DO SEU JAVASCRIPT */
 
-// --- LÓGICA DO SLIDESHOW DA GALERIA ---
+// --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO DINÂMICA) ---
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- INSTRUÇÃO: AQUI FICA SUA LISTA DE FOTOS! ---
+    // Adicione, remova ou reordene os links das suas fotos aqui.
+    // Use os caminhos relativos se as fotos estiverem na mesma pasta do projeto
+    // Ex: "imagens/foto1.jpg", ou a URL completa se estiverem hospedadas online.
+    const galeriaDeFotos = [
+      "https://photos.app.goo.gl/aRicdmhoVM43nVPp9",
+      "https://photos.app.goo.gl/YdoH5SNzqCpkmtpNA",
+      "https://photos.app.goo.gl/69FXhwRYAvnajjvx6",
+      "https://images.unsplash.com/photo-1554188248-986adbb73373?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1542337828-44-dee658934546?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1515634928627-2a4e0dae3ddf?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1529286448737-6a4a21160356?q=80&w=1964&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502418388593-3b0921a24343?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1569426850990-639409867568?q=80&w=1974&auto=format&fit=crop"
+    ];
+    // -----------------------------------------------------------
+
     const columns = document.querySelectorAll('.gallery-column');
 
-    if (columns.length > 0) {
-        const columnData = [];
+    if (columns.length > 0 && galeriaDeFotos.length > 0) {
+        // 1. Distribui as fotos da lista pelas colunas
+        galeriaDeFotos.forEach((fotoUrl, index) => {
+            const columnIndex = index % columns.length;
+            const img = document.createElement('img');
+            img.src = fotoUrl;
+            img.alt = `Memória ${index + 1}`;
+            img.className = 'gallery-photo';
+            columns[columnIndex].appendChild(img);
+        });
 
-        columns.forEach((column, colIndex) => {
+        // 2. Inicia a lógica do slideshow (a mesma de antes, agora com as fotos dinâmicas)
+        const columnData = [];
+        columns.forEach((column) => {
             const photos = column.querySelectorAll('.gallery-photo');
             if (photos.length > 0) {
-                photos[0].classList.add('is-active'); // Ativa a primeira foto de cada coluna
-                columnData.push({
-                    photos: photos,
-                    currentIndex: 0
-                });
+                photos[0].classList.add('is-active');
+                columnData.push({ photos: photos, currentIndex: 0 });
             }
         });
 
         const changePhoto = (colIndex) => {
             const data = columnData[colIndex];
-            if (!data) return;
+            if (!data || data.photos.length < 2) return;
 
-            // Esconde a foto atual
             data.photos[data.currentIndex].classList.remove('is-active');
-
-            // Calcula o índice da próxima foto
             data.currentIndex = (data.currentIndex + 1) % data.photos.length;
-
-            // Mostra a próxima foto
             data.photos[data.currentIndex].classList.add('is-active');
         };
 
-        // Inicia os slideshows com o escalonamento que você pediu
-        setInterval(() => changePhoto(0), 5000); // Coluna 1 muda a cada 5s
-        setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000); // Coluna 2 começa 1s depois
-        setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000); // Coluna 3 começa 2s depois
+        setInterval(() => changePhoto(0), 5000); 
+        setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
+        setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
     }
 });
