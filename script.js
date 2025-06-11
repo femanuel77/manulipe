@@ -146,3 +146,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { once: true });
   }
 });
+/* ADICIONE ESTE NOVO BLOCO NO FINAL DO SEU JAVASCRIPT */
+
+// --- LÓGICA DO SLIDESHOW DA GALERIA ---
+document.addEventListener('DOMContentLoaded', () => {
+    const columns = document.querySelectorAll('.gallery-column');
+
+    if (columns.length > 0) {
+        const columnData = [];
+
+        columns.forEach((column, colIndex) => {
+            const photos = column.querySelectorAll('.gallery-photo');
+            if (photos.length > 0) {
+                photos[0].classList.add('is-active'); // Ativa a primeira foto de cada coluna
+                columnData.push({
+                    photos: photos,
+                    currentIndex: 0
+                });
+            }
+        });
+
+        const changePhoto = (colIndex) => {
+            const data = columnData[colIndex];
+            if (!data) return;
+
+            // Esconde a foto atual
+            data.photos[data.currentIndex].classList.remove('is-active');
+
+            // Calcula o índice da próxima foto
+            data.currentIndex = (data.currentIndex + 1) % data.photos.length;
+
+            // Mostra a próxima foto
+            data.photos[data.currentIndex].classList.add('is-active');
+        };
+
+        // Inicia os slideshows com o escalonamento que você pediu
+        setInterval(() => changePhoto(0), 5000); // Coluna 1 muda a cada 5s
+        setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000); // Coluna 2 começa 1s depois
+        setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000); // Coluna 3 começa 2s depois
+    }
+});
