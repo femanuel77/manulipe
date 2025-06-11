@@ -115,28 +115,68 @@ h2 {
   margin-bottom: 40px;
 }
 
-.galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+/* ADICIONE ESTE NOVO BLOCO NO LUGAR DOS ESTILOS ANTIGOS DA GALERIA */
+
+/* --- GALERIA SLIDESHOW --- */
+.gallery-slideshow {
+  display: flex; /* Começa como flex para o mobile */
+  justify-content: center;
 }
 
-.foto-item {
-  overflow: hidden;
-  border-radius: 10px;
+.gallery-column {
+  position: relative; /* Essencial para empilhar as fotos */
+  width: 100%;
+  max-width: 400px; /* Limita a largura no mobile */
+  aspect-ratio: 3 / 4; /* A proporção 3:4 que você pediu */
 }
 
-.foto-item img {
+/* Esconde as colunas 2 e 3 no mobile */
+.gallery-column:nth-child(2),
+.gallery-column:nth-child(3) {
+  display: none;
+}
+
+.gallery-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+  object-fit: cover; /* Garante que a foto preencha a proporção sem distorcer */
+  border-radius: 12px;
+  
+  /* Efeito de transição (o fade) */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  
+  /* A foto ativa fica visível e na frente */
+  &.is-active {
+    opacity: 1;
+    z-index: 2;
+  }
 }
 
-.foto-item:hover img {
-  transform: scale(1.05);
+/* Layout para Desktop (telas maiores que 768px) */
+@media (min-width: 769px) {
+  .gallery-slideshow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas */
+    gap: 30px; /* Espaçamento entre as colunas */
+    max-width: 1200px; /* Garante que não fique largo demais */
+    margin: 0 auto;
+  }
+  
+  .gallery-column {
+    max-width: none; /* Remove o limite de largura do mobile */
+  }
+
+  /* Mostra as colunas 2 e 3 no desktop */
+  .gallery-column:nth-child(2),
+  .gallery-column:nth-child(3) {
+    display: block;
+  }
 }
+
 
 .spotify-embed {
   max-width: 800px; 
