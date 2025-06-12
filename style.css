@@ -235,16 +235,15 @@ h2 {
   transform: scale(1);
 }
 
+/* Encontre esta regra e adicione a linha 'border' */
+
 .player-spotify-style {
   max-width: 800px;
   margin: 0 auto;
-  background-color: rgba(30, 30, 30, 0.5);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 
 .player-corpo {
   display: flex;
