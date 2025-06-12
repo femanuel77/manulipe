@@ -180,21 +180,26 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(trackConfig);
     }
 
-    
-    // ======================================================
-    /* SUBSTITUA O BLOCO DE REVELAÇÃO ATUAL POR ESTA VERSÃO */
-
  // BLOCO 4: LÓGICA DE REVELAÇÃO DO PLAYER
     // ======================================================
-    const revealBtn = document.getElementById('reveal-player-btn');
-    const playerWrapper = document.getElementById('player-wrapper');
-    const revealContainer = document.querySelector('.reveal-button-container');
 
-    if (revealBtn && playerWrapper && revealContainer) {
-        revealBtn.addEventListener('click', () => {
-            playerWrapper.classList.add('revealed');
-            revealContainer.style.display = 'none';
-        }, { once: true });
-    }
+      // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
+  const revealBtn = document.getElementById('reveal-player-btn');
+  const playerWrapper = document.getElementById('player-wrapper');
+  const revealContainer = document.querySelector('.reveal-button-container');
 
+  if(revealBtn && playerWrapper && musica && revealContainer) {
+    revealBtn.addEventListener('click', () => {
+      if (musica.paused) {
+        musica.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      }
+      playerWrapper.classList.add('revealed');
+      revealBtn.style.transition = 'opacity 0.3s ease';
+      revealBtn.style.opacity = '0';
+      revealBtn.style.pointerEvents = 'none'; 
+      revealContainer.style.display = 'none';
+    }, { once: true });
+  }
 });
