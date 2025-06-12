@@ -184,29 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     /* SUBSTITUA O BLOCO DE REVELAÇÃO ATUAL POR ESTA VERSÃO */
 
-// --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO "UM CLIQUE" - COM RISCO) ---
-const revealBtn = document.getElementById('reveal-player-btn');
-const playerWrapper = document.getElementById('player-wrapper');
-const revealContainer = document.querySelector('.reveal-button-container');
-const musica = document.getElementById('musica-player'); // Garante que temos acesso à variável da música
+ // BLOCO 4: LÓGICA DE REVELAÇÃO DO PLAYER
+    // ======================================================
+    const revealBtn = document.getElementById('reveal-player-btn');
+    const playerWrapper = document.getElementById('player-wrapper');
+    const revealContainer = document.querySelector('.reveal-button-container');
 
-if (revealBtn && playerWrapper && revealContainer && musica) {
-    revealBtn.addEventListener('click', () => {
+    if (revealBtn && playerWrapper && revealContainer) {
+        revealBtn.addEventListener('click', () => {
+            playerWrapper.classList.add('revealed');
+            revealContainer.style.display = 'none';
+        }, { once: true });
+    }
 
-        // 1. Tenta tocar a música IMEDIATAMENTE
-        if (musica.paused) {
-            musica.play();
-            // Atualiza a UI do player interno para já mostrar o ícone de pause
-            document.getElementById('play-icon').style.display = 'none';
-            document.getElementById('pause-icon').style.display = 'block';
-        }
-
-        // 2. Executa a animação visual para revelar o player
-        playerWrapper.classList.add('revealed');
-        
-        // 3. Esconde o contêiner do botão para remover o espaço
-        revealContainer.style.display = 'none';
-        
-    }, { once: true });
-}
-
+});
