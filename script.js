@@ -114,38 +114,44 @@ document.addEventListener('DOMContentLoaded', () => {
   
   loadTrack(trackConfig);
 
-  // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO DE DIAGNÓSTICO) ---
-  const revealBtn = document.getElementById('reveal-player-btn');
-  const playerWrapper = document.getElementById('player-wrapper');
+// --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (O código de diagnóstico do player de música que fizemos antes pode estar aqui, não tem problema)
+    
+    const revealBtn = document.getElementById('reveal-player-btn');
+    const playerWrapper = document.getElementById('player-wrapper');
+    const musica = document.getElementById('musica-player'); 
+    
+    // NOVO: Selecionamos também o contêiner do botão
+    const revealContainer = document.querySelector('.reveal-button-container');
 
-  if(revealBtn && playerWrapper && musica) {
-    revealBtn.addEventListener('click', () => {
-      console.log("Botão de revelação clicado. Tentando tocar a música...");
-      
-      // Tentativa de tocar a música e "escutar" a resposta
-      const playPromise = musica.play();
+    // Verifica se os elementos necessários existem
+    if(revealBtn && playerWrapper && musica && revealContainer) {
+        revealBtn.addEventListener('click', () => {
+            
+            const playPromise = musica.play();
 
-      if (playPromise !== undefined) {
-        playPromise.then(_ => {
-          // SUCESSO: O navegador permitiu.
-          console.log("SUCESSO: O navegador permitiu a reprodução.");
-          playIcon.style.display = 'none';
-          pauseIcon.style.display = 'block';
-        }).catch(error => {
-          // FALHA: O navegador bloqueou.
-          console.error("FALHA: O navegador bloqueou a reprodução automática. Erro:", error);
-          alert("Parece que o navegador bloqueou a música de tocar automaticamente. Por favor, clique no botão play do player para começar.");
-        });
-      }
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Sucesso ao tocar
+                    document.getElementById('play-icon').style.display = 'none';
+                    document.getElementById('pause-icon').style.display = 'block';
+                }).catch(error => {
+                    // Falha (bloqueio do navegador), o usuário terá que clicar no play do player
+                    console.error("FALHA: O navegador bloqueou a reprodução automática. Erro:", error);
+                });
+            }
 
-      // A animação visual acontece independentemente do sucesso do áudio
-      playerWrapper.classList.add('revealed');
-      revealBtn.style.transition = 'opacity 0.3s ease';
-      revealBtn.style.opacity = '0';
-      revealBtn.style.pointerEvents = 'none'; 
-    }, { once: true });
-  }
+            // A animação visual acontece independentemente do sucesso do áudio
+            playerWrapper.classList.add('revealed');
+            
+            // MUDANÇA PRINCIPAL: Escondemos o contêiner inteiro, e não só o botão
+            revealContainer.style.display = 'none'; 
+            
+        }, { once: true });
+    }
 });
+
 
 
 // --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO RESPONSIVA) ---
