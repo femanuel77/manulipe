@@ -210,4 +210,3 @@ if (revealBtn && playerWrapper && revealContainer && musica) {
     }, { once: true });
 }
 
-});
