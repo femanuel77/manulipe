@@ -6,15 +6,24 @@
   <title>ManuLipe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Nossa História no Tempo</h1>
+
+  <div id="splash-screen">
+    <div class="splash-content">
+      <h1>Um presente para você</h1>
+      <p>Está pronto para a nossa viagem no tempo?</p>
+      <button id="enter-button">Começar</button>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <section id="hero-section" class="container">
+      <h2>Nossa História no Tempo</h2>
       <p class="section-description-1">
-        Aqui ficam as memórias que construímos, os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história. amorinho
+        Aqui ficam as memórias que construímos, os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história.
       </p>
       <div id="contador">
         <div class="tempo-unidade"><span id="anos">0</span><label>Anos</label></div>
@@ -24,81 +33,79 @@
         <div class="tempo-unidade"><span id="minutos">0</span><label>Minutos</label></div>
         <div class="tempo-unidade"><span id="segundos">0</span><label>Segundos</label></div>
       </div>
-    </div>
-  </div>
-
-  <main>
-<section id="galeria" class="container">
-  <h2>Nossas Memórias</h2>
-  <p class="section-description">
-    Aqui ficam as memórias que construímos, os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história.
-  </p>
-
-  <div class="gallery-slideshow">
-    <div class="gallery-column"></div>
-    <div class="gallery-column"></div>
-    <div class="gallery-column"></div>
-  </div>
-</section>
-
-
-    <section id="playlist" class="container">
-      <h2>Nossa Trilha Sonora</h2>
-      <p class="section-description">
-        As músicas que marcaram nossos momentos, que embalaram nossas viagens e que se tornaram a trilha sonora oficial do nosso amor.
-      </p>
-      <div class="spotify-embed">
-        <p style="text-align: center;"><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rdmS5nXG1f1f02IhFUmDR?utm_source=generator&theme=0" width="90%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
-      </div>
     </section>
 
-    <section id="nosso-som" class="container">
-      <h2>Nossa Música</h2>
-      <p class="section-description">
-        Aquela música especial. A que toca e imediatamente nos transporta para um momento só nosso.
-      </p>
-      <div class="reveal-button-container">
-        <button id="reveal-player-btn" class="reveal-player-button">
-          <svg viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
-        </button>
-      </div>
-      <div id="player-wrapper" class="player-wrapper">
-        <div class="player-spotify-style">
-          <audio id="musica-player"></audio>
-          <div class="player-corpo">
-            <img src="https://i.scdn.co/image/ab67616d00001e0209db791ec9bc25a6b4151588" alt="Capa do Álbum" class="album-art">
-            <div class="player-ui">
-              <div class="track-info">
-                <h3 id="track-title">Religião</h3>
-                <p id="track-artist">Jão</p>
-              </div>
-              <div class="player-timeline">
-                <div class="progress-bar-container">
-                  <div id="progress-bar"></div>
+    <main>
+      <section id="galeria" class="container">
+        <h2>Nossas Memórias</h2>
+        <p class="section-description">
+          Aqui ficam as memórias que construímos, os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história.
+        </p>
+        <div class="gallery-slideshow">
+          <div class="gallery-column"></div>
+          <div class="gallery-column"></div>
+          <div class="gallery-column"></div>
+        </div>
+      </section>
+
+      <section id="playlist" class="container">
+        <h2>Nossa Trilha Sonora</h2>
+        <p class="section-description">
+          As músicas que marcaram nossos momentos, que embalaram nossas viagens e que se tornaram a trilha sonora oficial do nosso amor.
+        </p>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rdmS5nXG1f1f02IhFUmDR?utm_source=generator&theme=0" width="90%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section id="nosso-som" class="container">
+        <h2>Nossa Música</h2>
+        <p class="section-description">
+          Aquela música especial. A que toca e imediatamente nos transporta para um momento só nosso.
+        </p>
+        <div class="reveal-button-container">
+          <button id="reveal-player-btn" class="reveal-player-button">
+            <svg viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
+          </button>
+        </div>
+        <div id="player-wrapper" class="player-wrapper">
+          <div class="player-spotify-style">
+            <audio id="musica-player"></audio>
+            <div class="player-corpo">
+              <img src="https://i.scdn.co/image/ab67616d00001e0209db791ec9bc25a6b4151588" alt="Capa do Álbum" class="album-art">
+              <div class="player-ui">
+                <div class="track-info">
+                  <h3 id="track-title">Religião</h3>
+                  <p id="track-artist">Jão</p>
                 </div>
-                <div class="time-display">
-                  <span id="current-time">0:00</span>
-                  <span id="total-duration">0:00</span>
+                <div class="player-timeline">
+                  <div class="progress-bar-container">
+                    <div id="progress-bar"></div>
+                  </div>
+                  <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span id="total-duration">0:00</span>
+                  </div>
                 </div>
-              </div>
-              <div class="player-controles">
-                <button id="prev-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
-                <button id="play-pause-btn" class="control-btn play-btn">
-                  <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
-                  <svg id="pause-icon" style="display: none;" viewBox="0 0 24 24"><path d="M9 5 V19 M15 5 V19"></path></svg>
-                </button>
-                <button id="next-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6z"></path></svg></button>
+                <div class="player-controles">
+                  <button id="prev-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
+                  <button id="play-pause-btn" class="control-btn play-btn">
+                    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
+                    <svg id="pause-icon" style="display: none;" viewBox="0 0 24 24"><path d="M9 5 V19 M15 5 V19"></path></svg>
+                  </button>
+                  <button id="next-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6z"></path></svg></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer>
-    <p>Feito com ❤️ para a pessoa que torna meus dias melhores.</p>
-  </footer>
+    <footer>
+      <p>Feito com ❤️ para a pessoa que torna meus dias melhores.</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>

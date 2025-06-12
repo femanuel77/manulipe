@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+        // --- LÓGICA DA TELA DE SURPRESA (SPLASH SCREEN) ---
+    const splashScreen = document.getElementById('splash-screen');
+    const mainContent = document.getElementById('main-content');
+    const enterButton = document.getElementById('enter-button');
 
+    if (splashScreen && mainContent && enterButton) {
+        enterButton.addEventListener('click', () => {
+            // Some com a tela de surpresa
+            splashScreen.style.opacity = '0';
+            // Torna a tela de surpresa "não-clicável" após o fade-out
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 1000); // 1 segundo, igual à transição do CSS
+
+            // Mostra o conteúdo principal
+            mainContent.style.visibility = 'visible';
+            mainContent.style.opacity = '1';
+        });
+    }
     // ======================================================
     // BLOCO 1: LÓGICA DO CONTADOR DE TEMPO
     // ======================================================
