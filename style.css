@@ -103,7 +103,8 @@ h2 {
 }
 /* Estilos específicos para o conteúdo da seção do topo */
 #hero-section {
-  text-align: center; /* Centraliza todo o texto e o contador */
+  text-align: center;
+  margin-top: 40px; /* Centraliza todo o texto e o contador */
 }
 
 #hero-section h1 {
