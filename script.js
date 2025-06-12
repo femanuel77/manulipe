@@ -182,32 +182,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
 
-  // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO DE DIAGNÓSTICO) ---
-  const revealBtn = document.getElementById('reveal-player-btn');
-  const playerWrapper = document.getElementById('player-wrapper');
+  /* SUBSTITUA O BLOCO DE REVELAÇÃO ANTIGO POR ESTA VERSÃO FINAL */
 
-  if(revealBtn && playerWrapper && musica) {
+// --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO FINAL E CORRIGIDA) ---
+const revealBtn = document.getElementById('reveal-player-btn');
+const playerWrapper = document.getElementById('player-wrapper');
+const revealContainer = document.querySelector('.reveal-button-container'); // Seleciona o contêiner
+
+// A verificação agora inclui o novo contêiner
+if (revealBtn && playerWrapper && revealContainer) {
     revealBtn.addEventListener('click', () => {
-      console.log("Botão de revelação clicado. Tentando tocar a música...");
-      
-      const playPromise = musica.play();
-
-      if (playPromise !== undefined) {
-        playPromise.then(_ => {
-          console.log("SUCESSO: O navegador permitiu a reprodução.");
-          playIcon.style.display = 'none';
-          pauseIcon.style.display = 'block';
-        }).catch(error => {
-          console.error("FALHA: O navegador bloqueou a reprodução automática. Erro:", error);
-          alert("Parece que o navegador bloqueou a música de tocar automaticamente. Por favor, clique no botão play do player para começar.");
-        });
-      }
-
-      playerWrapper.classList.add('revealed');
-      revealBtn.style.transition = 'opacity 0.3s ease';
-      revealBtn.style.opacity = '0';
-      revealBtn.style.pointerEvents = 'none'; 
-    }, { once: true });
-  }
-
-});
+        
+        // 1. Apenas executa a animação visual para revelar o player
+        playerWrapper.classList.add('revealed');
+        
+        // 2. Esconde o CONTÊINER inteiro do botão para remover o espaço
+        revealContainer.style.display = 'none';
+        
+    }, { once: true }); // O evento só acontece uma vez, o que é perfeito
+}
