@@ -58,10 +58,19 @@ h2 {
   color: #b3b3b3;
   line-height: 1.6;
 }
+.section-description-1 {
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  margin: 0px auto 30px auto;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
 
 /* --- SEÇÃO HERO & CONTADOR --- */
 .hero {
-  height: 90vh;
+  margin-top: 50px;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,6 +115,7 @@ h2 {
 }
 
 /* --- SEÇÕES DE CONTEÚDO --- */
+.hero,
 #galeria,
 #playlist,
 #nosso-som {
