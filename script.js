@@ -147,17 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO DINÂMICA) ---
+
+// --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO RESPONSIVA) ---
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- INSTRUÇÃO: AQUI FICA SUA LISTA DE FOTOS! ---
-    // Adicione, remova ou reordene os links das suas fotos aqui.
-    // Use os caminhos relativos se as fotos estiverem na mesma pasta do projeto
-    // Ex: "imagens/foto1.jpg", ou a URL completa se estiverem hospedadas online.
     const galeriaDeFotos = [
-      "https://photos.app.goo.gl/aRicdmhoVM43nVPp9",
-      "https://photos.app.goo.gl/YdoH5SNzqCpkmtpNA",
-      "https://photos.app.goo.gl/69FXhwRYAvnajjvx6",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbyXH4dY3Dr8CszZNCwj3GyFc6LMVfQVGQkQi4B1wFtp8NJj9Fs7PLW7tA&s=10",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwSValt4a1hK3EGAuhKGdVKyVq5jZ_3rqYTodwF-S9E_NJlwZvyTVIIRE&s=10",
+      "https://images.unsplash.com/photo-1523900533314-542617fdd336?q=80&w=1974&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1554188248-986adbb73373?q=80&w=1974&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1542337828-44-dee658934546?q=80&w=1974&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1515634928627-2a4e0dae3ddf?q=80&w=2070&auto=format&fit=crop",
@@ -168,19 +166,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------------
 
     const columns = document.querySelectorAll('.gallery-column');
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     if (columns.length > 0 && galeriaDeFotos.length > 0) {
-        // 1. Distribui as fotos da lista pelas colunas
-        galeriaDeFotos.forEach((fotoUrl, index) => {
-            const columnIndex = index % columns.length;
-            const img = document.createElement('img');
-            img.src = fotoUrl;
-            img.alt = `Memória ${index + 1}`;
-            img.className = 'gallery-photo';
-            columns[columnIndex].appendChild(img);
-        });
+        // 1. Distribui as fotos de acordo com o tamanho da tela
+        if (isMobile) {
+            // Se for mobile, joga TODAS as fotos na primeira coluna
+            galeriaDeFotos.forEach((fotoUrl, index) => {
+                const img = document.createElement('img');
+                img.src = fotoUrl;
+                img.alt = `Memória ${index + 1}`;
+                img.className = 'gallery-photo';
+                columns[0].appendChild(img);
+            });
+        } else {
+            // Se for desktop, distribui nas três colunas
+            galeriaDeFotos.forEach((fotoUrl, index) => {
+                const columnIndex = index % columns.length;
+                const img = document.createElement('img');
+                img.src = fotoUrl;
+                img.alt = `Memória ${index + 1}`;
+                img.className = 'gallery-photo';
+                columns[columnIndex].appendChild(img);
+            });
+        }
 
-        // 2. Inicia a lógica do slideshow (a mesma de antes, agora com as fotos dinâmicas)
+        // 2. Inicia a lógica do slideshow (agora com as fotos corretas)
         const columnData = [];
         columns.forEach((column) => {
             const photos = column.querySelectorAll('.gallery-photo');
@@ -199,8 +210,15 @@ document.addEventListener('DOMContentLoaded', () => {
             data.photos[data.currentIndex].classList.add('is-active');
         };
 
-        setInterval(() => changePhoto(0), 5000); 
-        setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
-        setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
+        // Inicia os slideshows
+        if (isMobile) {
+            // No mobile, só precisamos do slideshow da primeira coluna
+            setInterval(() => changePhoto(0), 5000);
+        } else {
+            // No desktop, iniciamos os três com o escalonamento
+            setInterval(() => changePhoto(0), 5000); 
+            setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
+            setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
+        }
     }
 });
