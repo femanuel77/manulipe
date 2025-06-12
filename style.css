@@ -31,7 +31,7 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: url('https://lh3.googleusercontent.com/pw/AP1GczOHcPv-1E4jx5T71JdZ4qRf8ozircJ5CjXWMERveG851aVKlB-VNt71WzwLFcvhpdf5klAP03gghGF4n1BzJqmpgbuvRu4qdWlwxAr5JoGmczQNrciXbdJX4MrFiKz1Gve3ljwquQ11QxyHqBjZhixH=w441-h886-s-no-gm?authuser=0');
+  background-image: url('https://photos.google.com/share/AF1QipM7GOFp3MPpk-Z48KZ2CVRfmCkreP_ajERWJ66r40WSKPmxHmA-r3xXLdJFPXxs3w/photo/AF1QipNEAUdYg9jfyae1tz9wQ6EyBfv0bJyq0oVFeKJt?key=VUZ2Nk1jRzlnbDFHNE1xTEJ3Qm9Sa1lBRnJ1WFRn');
   background-size: cover;
   background-position: center center;
   filter: blur(5px) brightness(0.5);
@@ -109,8 +109,8 @@ h2 {
 #galeria,
 #playlist,
 #nosso-som {
-  background-color: rgba(24, 24, 24, 0.6);
-  backdrop-filter: blur(3px);
+  background-color: rgba(173, 171, 171, 0.2);
+  backdrop-filter: blur(6px);
   border-radius: 12px;
   margin-bottom: 40px;
 }
