@@ -311,8 +311,8 @@ h2 {
 }
 
 .album-art {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
