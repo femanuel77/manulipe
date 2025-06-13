@@ -7,22 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (splashScreen && mainContent && enterButton) {
         enterButton.addEventListener('click', () => {
             // Some com a tela de surpresa
-            splashScreen.classList.add('hidden');
-            // Mostra o conteúdo principal
-            mainContent.classList.add('visible');
+            splashScreen.style.opacity = '0';
+            // Torna a tela de surpresa "não-clicável" após o fade-out
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 1000); // 1 segundo, igual à transição do CSS
 
-            // --- NOVO: INICIA O SLIDESHOW DA GALERIA APENAS AGORA ---
-            if (typeof window.changePhoto === 'function') {
-                const isMobile = window.matchMedia("(max-width: 768px)").matches;
-                if (isMobile) {
-                    setInterval(() => window.changePhoto(0), 6000); // 6 segundos
-                } else {
-                    setInterval(() => window.changePhoto(0), 6000); 
-                    setTimeout(() => setInterval(() => window.changePhoto(1), 6000), 1000);
-                    setTimeout(() => setInterval(() => window.changePhoto(2), 6000), 2000);
-                }
-            }
-        }, { once: true }); // O evento só acontece uma vez
+            // Mostra o conteúdo principal
+            mainContent.style.visibility = 'visible';
+            mainContent.style.opacity = '1';
+        });
     }
     // ======================================================
     // BLOCO 1: LÓGICA DO CONTADOR DE TEMPO
@@ -68,68 +62,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ======================================================
-// BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO ALEATÓRIA)
-// ======================================================
-const galeriaDeFotos = [
-    // Sua lista de fotos continua aqui...
-    "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
-];
+    // BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA
+    // ======================================================
+    const galeriaDeFotos = [
+        "imagens/1.jpg",
+        "imagens/2.jpg",
+        "imagens/3.jpg",
+        "imagens/4.jpg",
+        "imagens/5.jpg",
+        "imagens/6.jpg",
+        "imagens/7_b.jpg",
+        "imagens/8.jpg",
+        "imagens/9.jpg",
+        "imagens/10.jpg",
+        "imagens/11.jpg",
+        "imagens/12.jpg",
+        "imagens/13.jpg",
+        "imagens/14.jpg",
+        "imagens/15.jpg",
+        "imagens/16.jpg",
+        "imagens/17.jpg",
+        "imagens/18.jpg",
+        "imagens/19.jpg",
+        "imagens/20.jpg",
+        "imagens/21.jpg",
+        "imagens/22.jpg",
+        "imagens/23.jpg",
+        "imagens/24.jpg",
+        "imagens/25.jpg",
+    ];
 
-// Função para embaralhar o array de fotos (Algoritmo Fisher-Yates)
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
-    }
-}
+    const galleryColumns = document.querySelectorAll('.gallery-column');
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-// Embaralha a lista de fotos antes de usar
-shuffleArray(galeriaDeFotos);
-
-const galleryColumns = document.querySelectorAll('.gallery-column');
-const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
-    // 1. Distribui as fotos (já embaralhadas)
-    if (isMobile) {
-        galeriaDeFotos.forEach((fotoUrl, index) => {
-            const img = document.createElement('img');
-            img.src = fotoUrl;
-            img.alt = `Memória ${index + 1}`;
-            img.className = 'gallery-photo';
-            galleryColumns[0].appendChild(img);
-        });
-    } else {
-        galeriaDeFotos.forEach((fotoUrl, index) => {
-            const columnIndex = index % galleryColumns.length;
-            const img = document.createElement('img');
-            img.src = fotoUrl;
-            img.alt = `Memória ${index + 1}`;
-            img.className = 'gallery-photo';
-            galleryColumns[columnIndex].appendChild(img);
-        });
-    }
-
-    // 2. Prepara os dados para o slideshow
-    const columnData = [];
-    galleryColumns.forEach((column) => {
-        const photos = column.querySelectorAll('.gallery-photo');
-        if (photos.length > 0) {
-            photos[0].classList.add('is-active');
-            columnData.push({ photos: photos, currentIndex: 0 });
+    if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
+        if (isMobile) {
+            galeriaDeFotos.forEach((fotoUrl, index) => {
+                const img = document.createElement('img');
+                img.src = fotoUrl;
+                img.alt = `Memória ${index + 1}`;
+                img.className = 'gallery-photo';
+                galleryColumns[0].appendChild(img);
+            });
+        } else {
+            galeriaDeFotos.forEach((fotoUrl, index) => {
+                const columnIndex = index % galleryColumns.length;
+                const img = document.createElement('img');
+                img.src = fotoUrl;
+                img.alt = `Memória ${index + 1}`;
+                img.className = 'gallery-photo';
+                galleryColumns[columnIndex].appendChild(img);
+            });
         }
-    });
 
-    // 3. A função de trocar a foto permanece a mesma
-    window.changePhoto = (colIndex) => {
-        const data = columnData[colIndex];
-        if (!data || data.photos.length < 2) return;
-        data.photos[data.currentIndex].classList.remove('is-active');
-        data.currentIndex = (data.currentIndex + 1) % data.photos.length;
-        data.photos[data.currentIndex].classList.add('is-active');
-    };
-}
-    
+        const columnData = [];
+        galleryColumns.forEach((column) => {
+            const photos = column.querySelectorAll('.gallery-photo');
+            if (photos.length > 0) {
+                photos[0].classList.add('is-active');
+                columnData.push({ photos: photos, currentIndex: 0 });
+            }
+        });
+
+        const changePhoto = (colIndex) => {
+            const data = columnData[colIndex];
+            if (!data || data.photos.length < 2) return;
+            data.photos[data.currentIndex].classList.remove('is-active');
+            data.currentIndex = (data.currentIndex + 1) % data.photos.length;
+            data.photos[data.currentIndex].classList.add('is-active');
+        };
+
+        if (isMobile) {
+            setInterval(() => changePhoto(0), 5000);
+        } else {
+            setInterval(() => changePhoto(0), 5000); 
+            setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
+            setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
+        }
+    }
+
+
     // ======================================================
     // BLOCO 3: LÓGICA DO PLAYER DE MÚSICA
     // ======================================================
@@ -139,7 +151,7 @@ if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
         audioSrc: "religiao.mp3", // Use o link de teste por enquanto
         artSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ4WlKs6c-tc2Oo0tTknui4ReQq7_8ovmxHafSsS7XuiDdh2VNXbtwGlt_&s=10"
     };
-    
+
     const musica = document.getElementById('musica-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
     const playIcon = document.getElementById('play-icon');
@@ -185,13 +197,13 @@ if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
                 currentTimeEl.textContent = formatTime(musica.currentTime);
             }
         }
-      
+    
         function setProgress(e) {
             if(musica.duration) {
                 musica.currentTime = (e.offsetX / this.clientWidth) * musica.duration;
             }
         }
-      
+    
         if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
         musica.addEventListener('timeupdate', updateProgress);
         if (progressBarContainer) progressBarContainer.addEventListener('click', setProgress);
@@ -208,26 +220,26 @@ if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
         loadTrack(trackConfig);
     }
 
- // BLOCO 4: LÓGICA DE REVELAÇÃO DO PLAYER
+    // BLOCO 4: LÓGICA DE REVELAÇÃO DO PLAYER
     // ======================================================
 
-      // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
-  const revealBtn = document.getElementById('reveal-player-btn');
-  const playerWrapper = document.getElementById('player-wrapper');
-  const revealContainer = document.querySelector('.reveal-button-container');
+    // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
+    const revealBtn = document.getElementById('reveal-player-btn');
+    const playerWrapper = document.getElementById('player-wrapper');
+    const revealContainer = document.querySelector('.reveal-button-container');
 
-  if(revealBtn && playerWrapper && musica && revealContainer) {
+    if(revealBtn && playerWrapper && musica && revealContainer) {
     revealBtn.addEventListener('click', () => {
-      if (musica.paused) {
+    if (musica.paused) {
         musica.play();
         playIcon.style.display = 'none';
         pauseIcon.style.display = 'block';
-      }
-      playerWrapper.classList.add('revealed');
-      revealBtn.style.transition = 'opacity 0.3s ease';
-      revealBtn.style.opacity = '0';
-      revealBtn.style.pointerEvents = 'none'; 
-      revealContainer.style.display = 'none';
+    }
+    playerWrapper.classList.add('revealed');
+    revealBtn.style.transition = 'opacity 0.3s ease';
+    revealBtn.style.opacity = '0';
+    revealBtn.style.pointerEvents = 'none'; 
+    revealContainer.style.display = 'none';
     }, { once: true });
-  }
+    }
 });
