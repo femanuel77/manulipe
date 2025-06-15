@@ -62,40 +62,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ======================================================
-    // BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA
+    // BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO ALEATÓRIA)
     // ======================================================
     const galeriaDeFotos = [
-        "imagens/1.jpg",
-        "imagens/2.jpg",
-        "imagens/3.jpg",
-        "imagens/4.jpg",
-        "imagens/5.jpg",
-        "imagens/6.jpg",
-        "imagens/7_b.jpg",
-        "imagens/8.jpg",
-        "imagens/9.jpg",
-        "imagens/10.jpg",
-        "imagens/11.jpg",
-        "imagens/12.jpg",
-        "imagens/13.jpg",
-        "imagens/14.jpg",
-        "imagens/15.jpg",
-        "imagens/16.jpg",
-        "imagens/17.jpg",
-        "imagens/18.jpg",
-        "imagens/19.jpg",
-        "imagens/20.jpg",
-        "imagens/21.jpg",
-        "imagens/22.jpg",
-        "imagens/23.jpg",
-        "imagens/24.jpg",
-        "imagens/25.jpg",
+        // Sua lista de fotos continua aqui...
+        "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
     ];
-
+    
+    // Função para embaralhar o array de fotos (Algoritmo Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+        }
+    }
+    
+    // Embaralha a lista de fotos antes de usar
+    shuffleArray(galeriaDeFotos);
+    
     const galleryColumns = document.querySelectorAll('.gallery-column');
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
+    
     if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
+        // 1. Distribui as fotos (já embaralhadas)
         if (isMobile) {
             galeriaDeFotos.forEach((fotoUrl, index) => {
                 const img = document.createElement('img');
@@ -114,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 galleryColumns[columnIndex].appendChild(img);
             });
         }
-
+    
+        // 2. Prepara os dados para o slideshow
         const columnData = [];
         galleryColumns.forEach((column) => {
             const photos = column.querySelectorAll('.gallery-photo');
@@ -123,25 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 columnData.push({ photos: photos, currentIndex: 0 });
             }
         });
-
-        const changePhoto = (colIndex) => {
+    
+        // 3. A função de trocar a foto permanece a mesma
+        window.changePhoto = (colIndex) => {
             const data = columnData[colIndex];
             if (!data || data.photos.length < 2) return;
             data.photos[data.currentIndex].classList.remove('is-active');
             data.currentIndex = (data.currentIndex + 1) % data.photos.length;
             data.photos[data.currentIndex].classList.add('is-active');
         };
-
-        if (isMobile) {
-            setInterval(() => changePhoto(0), 5000);
-        } else {
-            setInterval(() => changePhoto(0), 5000); 
-            setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
-            setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
-        }
     }
-
-
     // ======================================================
     // BLOCO 3: LÓGICA DO PLAYER DE MÚSICA
     // ======================================================
