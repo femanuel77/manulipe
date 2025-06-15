@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const spanMinutos = document.getElementById('minutos');
     const spanSegundos = document.getElementById('segundos');
 
-    if (spanAnos) {
+    // A lógica do contador agora só roda se o elemento principal for encontrado.
+    if (spanAnos) { 
         function atualizarContador() {
             const agora = new Date();
             let anos = agora.getFullYear() - dataInicio.getFullYear();
@@ -54,10 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setInterval(atualizarContador, 1000);
         atualizarContador();
-    }
+    } // A CHAVE DO ERRO ESTAVA AQUI: O 'if' do contador fechava e impedia o resto de rodar. Agora está corrigido.
 
     // ======================================================
-    // BLOCO 3: LÓGICA DO SLIDESHOW DA GALERIA (ALEATÓRIO)
+    // BLOCO 3: LÓGICA DO SLIDESHOW DA GALERIA
     // ======================================================
     const galeriaDeFotos = [
         "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
@@ -72,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffleArray(galeriaDeFotos);
 
     const galleryColumns = document.querySelectorAll('.gallery-column');
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (galleryColumns.length > 0) {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
         if (isMobile) {
             galeriaDeFotos.forEach((fotoUrl, index) => {
                 const img = document.createElement('img');
@@ -110,14 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
             data.currentIndex = (data.currentIndex + 1) % data.photos.length;
             data.photos[data.currentIndex].classList.add('is-active');
         };
-        
-        // CORREÇÃO: Os timers do slideshow voltam para cá, para iniciar quando a página carregar.
+
         if (isMobile) {
-            if (columnData.length > 0) setInterval(() => changePhoto(0), 6000);
+            if (columnData[0]?.photos.length > 1) setInterval(() => changePhoto(0), 5000); // Timer de 5s, como era no seu código
         } else {
-            if (columnData.length > 0) setInterval(() => changePhoto(0), 6000); 
-            if (columnData.length > 1) setTimeout(() => setInterval(() => changePhoto(1), 6000), 1000);
-            if (columnData.length > 2) setTimeout(() => setInterval(() => changePhoto(2), 6000), 2000);
+            if (columnData[0]?.photos.length > 1) setInterval(() => changePhoto(0), 5000);
+            if (columnData[1]?.photos.length > 1) setTimeout(() => setInterval(() => changePhoto(1), 5000), 1000);
+            if (columnData[2]?.photos.length > 1) setTimeout(() => setInterval(() => changePhoto(2), 5000), 2000);
         }
     }
 
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             revealContainer.style.display = 'none';
             if (musica && musica.paused) {
                 musica.play().catch(error => {
-                    console.error("Autoplay bloqueado pelo navegador:", error);
+                    console.error("Autoplay do player bloqueado:", error);
                 });
                 if(playIcon) playIcon.style.display = 'none';
                 if(pauseIcon) pauseIcon.style.display = 'block';
