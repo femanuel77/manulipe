@@ -1,18 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- LÓGICA DA TELA DE SURPRESA (SPLASH SCREEN) ---
+
+    // ======================================================
+    // BLOCO 1: LÓGICA DA TELA DE SURPRESA (SPLASH SCREEN)
+    // ======================================================
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
     const enterButton = document.getElementById('enter-button');
-    
+
     if (splashScreen && mainContent && enterButton) {
         enterButton.addEventListener('click', () => {
-            // A única função agora é esconder esta tela e mostrar o conteúdo
             splashScreen.classList.add('hidden');
             mainContent.classList.add('visible');
         }, { once: true });
     }
+
     // ======================================================
-    // BLOCO 1: LÓGICA DO CONTADOR DE TEMPO
+    // BLOCO 2: LÓGICA DO CONTADOR DE TEMPO
     // ======================================================
     const dataInicio = new Date('2024-07-08T16:00:00');
     const spanAnos = document.getElementById('anos');
@@ -53,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarContador();
     }
 
-
     // ======================================================
-    // --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO RESPONSIVA) ---
+    // BLOCO 3: LÓGICA DO SLIDESHOW DA GALERIA (ALEATÓRIO)
+    // ======================================================
     const galeriaDeFotos = [
         "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
     ];
-    
+
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -67,12 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     shuffleArray(galeriaDeFotos);
-    
+
     const galleryColumns = document.querySelectorAll('.gallery-column');
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    
+
     if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
-        // 1. Distribui as fotos (já embaralhadas) de acordo com o tamanho da tela
         if (isMobile) {
             galeriaDeFotos.forEach((fotoUrl, index) => {
                 const img = document.createElement('img');
@@ -91,8 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 galleryColumns[columnIndex].appendChild(img);
             });
         }
-    
-        // 2. Prepara os dados para o slideshow
+
         const columnData = [];
         galleryColumns.forEach((column) => {
             const photos = column.querySelectorAll('.gallery-photo');
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 columnData.push({ photos: photos, currentIndex: 0 });
             }
         });
-    
+
         const changePhoto = (colIndex) => {
             const data = columnData[colIndex];
             if (!data || data.photos.length < 2) return;
@@ -109,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             data.currentIndex = (data.currentIndex + 1) % data.photos.length;
             data.photos[data.currentIndex].classList.add('is-active');
         };
-    
-        // 3. INICIA O SLIDESHOW AQUI, ASSIM QUE A PÁGINA CARREGA
+        
+        // CORREÇÃO: Os timers do slideshow voltam para cá, para iniciar quando a página carregar.
         if (isMobile) {
             if (columnData.length > 0) setInterval(() => changePhoto(0), 6000);
         } else {
@@ -119,16 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (columnData.length > 2) setTimeout(() => setInterval(() => changePhoto(2), 6000), 2000);
         }
     }
+
     // ======================================================
-    // BLOCO 3: LÓGICA DO PLAYER DE MÚSICA
+    // BLOCO 4: LÓGICA DO PLAYER DE MÚSICA
     // ======================================================
     const trackConfig = {
         title: "Religião",
         artist: "Jão",
-        audioSrc: "religiao.mp3", // Use o link de teste por enquanto
-        artSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ4WlKs6c-tc2Oo0tTknui4ReQq7_8ovmxHafSsS7XuiDdh2VNXbtwGlt_&s=10"
+        audioSrc: "religiao.mp3",
+        artSrc: "https://i.scdn.co/image/ab67616d00001e0209db791ec9bc25a6b4151588"
     };
-
+    
     const musica = document.getElementById('musica-player');
     const playPauseBtn = document.getElementById('play-pause-btn');
     const playIcon = document.getElementById('play-icon');
@@ -174,13 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentTimeEl.textContent = formatTime(musica.currentTime);
             }
         }
-    
+      
         function setProgress(e) {
             if(musica.duration) {
                 musica.currentTime = (e.offsetX / this.clientWidth) * musica.duration;
             }
         }
-    
+      
         if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
         musica.addEventListener('timeupdate', updateProgress);
         if (progressBarContainer) progressBarContainer.addEventListener('click', setProgress);
@@ -196,27 +198,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         loadTrack(trackConfig);
     }
-
-    // BLOCO 4: LÓGICA DE REVELAÇÃO DO PLAYER
+    
     // ======================================================
-
-    // --- LÓGICA DE REVELAÇÃO DO PLAYER (VERSÃO CORRIGIDA) ---
+    // BLOCO 5: LÓGICA DE REVELAÇÃO DO PLAYER
+    // ======================================================
     const revealBtn = document.getElementById('reveal-player-btn');
     const playerWrapper = document.getElementById('player-wrapper');
     const revealContainer = document.querySelector('.reveal-button-container');
 
-    if(revealBtn && playerWrapper && musica && revealContainer) {
-    revealBtn.addEventListener('click', () => {
-    if (musica.paused) {
-        musica.play();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
+    if (revealBtn && playerWrapper && revealContainer) {
+        revealBtn.addEventListener('click', () => {
+            playerWrapper.classList.add('revealed');
+            revealContainer.style.display = 'none';
+            if (musica && musica.paused) {
+                musica.play().catch(error => {
+                    console.error("Autoplay bloqueado pelo navegador:", error);
+                });
+                if(playIcon) playIcon.style.display = 'none';
+                if(pauseIcon) pauseIcon.style.display = 'block';
+            }
+        }, { once: true });
     }
-    playerWrapper.classList.add('revealed');
-    revealBtn.style.transition = 'opacity 0.3s ease';
-    revealBtn.style.opacity = '0';
-    revealBtn.style.pointerEvents = 'none'; 
-    revealContainer.style.display = 'none';
-    }, { once: true });
-    }
+
 });
