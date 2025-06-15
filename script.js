@@ -3,20 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const splashScreen = document.getElementById('splash-screen');
     const mainContent = document.getElementById('main-content');
     const enterButton = document.getElementById('enter-button');
-
+    
     if (splashScreen && mainContent && enterButton) {
         enterButton.addEventListener('click', () => {
-            // Some com a tela de surpresa
-            splashScreen.style.opacity = '0';
-            // Torna a tela de surpresa "não-clicável" após o fade-out
-            setTimeout(() => {
-                splashScreen.style.display = 'none';
-            }, 1000); // 1 segundo, igual à transição do CSS
-
-            // Mostra o conteúdo principal
-            mainContent.style.visibility = 'visible';
-            mainContent.style.opacity = '1';
-        });
+            // A única função agora é esconder esta tela e mostrar o conteúdo
+            splashScreen.classList.add('hidden');
+            mainContent.classList.add('visible');
+        }, { once: true });
     }
     // ======================================================
     // BLOCO 1: LÓGICA DO CONTADOR DE TEMPO
@@ -62,29 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ======================================================
-    // BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO ALEATÓRIA)
-    // ======================================================
+    // --- LÓGICA DO SLIDESHOW DA GALERIA (VERSÃO RESPONSIVA) ---
     const galeriaDeFotos = [
-        // Sua lista de fotos continua aqui...
         "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
     ];
     
-    // Função para embaralhar o array de fotos (Algoritmo Fisher-Yates)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+            [array[i], array[j]] = [array[j], array[i]];
         }
     }
-    
-    // Embaralha a lista de fotos antes de usar
     shuffleArray(galeriaDeFotos);
     
     const galleryColumns = document.querySelectorAll('.gallery-column');
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     
     if (galleryColumns.length > 0 && galeriaDeFotos.length > 0) {
-        // 1. Distribui as fotos (já embaralhadas)
+        // 1. Distribui as fotos (já embaralhadas) de acordo com o tamanho da tela
         if (isMobile) {
             galeriaDeFotos.forEach((fotoUrl, index) => {
                 const img = document.createElement('img');
@@ -114,14 +102,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     
-        // 3. A função de trocar a foto permanece a mesma
-        window.changePhoto = (colIndex) => {
+        const changePhoto = (colIndex) => {
             const data = columnData[colIndex];
             if (!data || data.photos.length < 2) return;
             data.photos[data.currentIndex].classList.remove('is-active');
             data.currentIndex = (data.currentIndex + 1) % data.photos.length;
             data.photos[data.currentIndex].classList.add('is-active');
         };
+    
+        // 3. INICIA O SLIDESHOW AQUI, ASSIM QUE A PÁGINA CARREGA
+        if (isMobile) {
+            if (columnData.length > 0) setInterval(() => changePhoto(0), 6000);
+        } else {
+            if (columnData.length > 0) setInterval(() => changePhoto(0), 6000); 
+            if (columnData.length > 1) setTimeout(() => setInterval(() => changePhoto(1), 6000), 1000);
+            if (columnData.length > 2) setTimeout(() => setInterval(() => changePhoto(2), 6000), 2000);
+        }
     }
     // ======================================================
     // BLOCO 3: LÓGICA DO PLAYER DE MÚSICA
