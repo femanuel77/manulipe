@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManuLipe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="splash-screen">
+    <div class="splash-content">
+      <h1>Um ano de nós</h1>
+      <p></p>
+      <button id="enter-button">Começar</button>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <section id="hero-section" class="container">
+      <h2>Nossa História no Tempo</h2>
+      <p class="section-description">
+        Tanto tempo se passou desde o dia que você se tornou a pessoa mais importante na minha vida. A cada segundo que passa, meu amor por você cresce mais e mais.
+      </p>
+      <div id="contador">
+        <div class="tempo-unidade"><span id="anos">0</span><label>Anos</label></div>
+        <div class="tempo-unidade"><span id="meses">0</span><label>Meses</label></div>
+        <div class="tempo-unidade"><span id="dias">0</span><label>Dias</label></div>
+        <div class="tempo-unidade"><span id="horas">0</span><label>Horas</label></div>
+        <div class="tempo-unidade"><span id="minutos">0</span><label>Minutos</label></div>
+        <div class="tempo-unidade"><span id="segundos">0</span><label>Segundos</label></div>
+      </div>
+    </section>
+
+    <main>
+      <section id="galeria" class="container">
+        <h2>Nossas Memórias</h2>
+        <p class="section-description">
+          Os momentos que guardamos e as risadas que compartilhamos. Cada foto é um capítulo da nossa história. Todas essas imagens, além de armazenadas na memória computacional, estão sempre no meu coração e na minha mente.
+        </p>
+        <div class="gallery-slideshow">
+          <div class="gallery-column"></div>
+          <div class="gallery-column"></div>
+          <div class="gallery-column"></div>
+        </div>
+      </section>
+      
+       <section id="serie-youtube" class="container">
+        <h2>Nossa Série</h2>
+        <p class="section-description">
+          Já viajamos por várias histórias: fomos ao Mundo Invertido em Stranger Things; estudamos em uma escola na Espanha em Elite; fomos ao caminho das bruxas em Agatha; viajamos no tempo em De volta aos 15. Mas, a nossa série, a que sempre nos lembra sobre o nosso amor, você já sabe qual é.
+        </p>
+        
+        <div id="video-player-container" class="video-player-container">
+          <video id="custom-video" poster="caminho/para/imagem_de_capa.jpg">
+            <source src="https://res.cloudinary.com/dzroj0stp/video/upload/v1750102345/gejpdayyvfcv0gzutcfy.mp4" type="video/mp4">
+          </video>
+
+          <button id="video-central-play-btn" title="Play">
+            <svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path d="M477.606,128.055C443.431,68.863,388.251,26.52,322.229,8.83C256.208-8.862,187.25,0.217,128.055,34.394 C68.861,68.57,26.52,123.75,8.83,189.772c-17.69,66.021-8.611,134.981,25.564,194.173 C68.568,443.137,123.75,485.48,189.771,503.17c22.046,5.908,44.417,8.83,66.646,8.83c44.339,0,88.101-11.629,127.529-34.393 c59.192-34.175,101.535-89.355,119.225-155.377C520.862,256.207,511.781,187.249,477.606,128.055z M477.429,315.333 c-15.848,59.146-53.78,108.581-106.81,139.197c-53.028,30.617-114.806,38.749-173.952,22.903 c-59.147-15.848-108.581-53.78-139.198-106.81c-30.616-53.028-38.749-114.807-22.9-173.954 C50.418,137.523,88.35,88.09,141.379,57.472c35.325-20.395,74.524-30.812,114.249-30.812c19.91,0,39.959,2.618,59.702,7.909 c59.146,15.848,108.581,53.78,139.197,106.81C485.144,194.408,493.278,256.186,477.429,315.333z"></path>
+                <path d="M378.778,231.852l-164.526-94.99c-8.731-5.041-19.155-5.039-27.886-0.001c-8.731,5.04-13.944,14.069-13.944,24.15v189.98 c0,10.081,5.212,19.109,13.944,24.15c4.365,2.521,9.152,3.78,13.941,3.78c4.79,0,9.579-1.262,13.944-3.781l164.528-94.989 c8.73-5.042,13.941-14.07,13.941-24.151C392.72,245.92,387.508,236.892,378.778,231.852z M365.452,257.074l-164.527,94.989 c-0.201,0.117-0.62,0.358-1.236,0c-0.618-0.357-0.618-0.839-0.618-1.071v-189.98c0-0.232,0-0.714,0.618-1.071 c0.242-0.14,0.453-0.188,0.633-0.188c0.28,0,0.482,0.117,0.605,0.188l164.526,94.99c0.201,0.116,0.618,0.357,0.618,1.071 C366.071,256.716,365.652,256.958,365.452,257.074z"></path>
+                <path d="M413.303,134.44c-31.689-40.938-79.326-68.442-130.698-75.461c-7.283-0.997-14.009,4.106-15.006,11.399 c-0.995,7.291,4.108,14.009,11.399,15.006c44.512,6.081,85.783,29.909,113.232,65.369c2.626,3.392,6.565,5.168,10.546,5.168 c2.849,0,5.72-0.909,8.146-2.789C416.741,148.628,417.807,140.259,413.303,134.44z"></path>
+              </g>
+            </svg>
+          </button>
+
+          <div class="video-controls" id="video-controls">
+            <button id="video-play-pause-btn" title="Play/Pause">
+              <svg id="video-play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+              <svg id="video-pause-icon" style="display: none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+            </button>
+            <input type="range" id="video-progress-bar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+            <div class="time-display" id="video-time-display">0:00 / 0:00</div>
+            <button id="video-fullscreen-btn" title="Tela Cheia">
+              <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"></path></svg>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="playlist" class="container">
+        <h2>Nossa Trilha Sonora</h2>
+        <p class="section-description">
+          As músicas que marcaram nossos momentos e nosso sentimento. Cada uma diz exatamente tudo que eu não consegui colocar em palavras pra te falar.
+        </p>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rdmS5nXG1f1f02IhFUmDR?utm_source=generator&theme=0" width="90%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section id="nosso-som" class="container">
+        <h2>Nossa Música</h2>
+        <p class="section-description">
+          E não podia faltar, a nossa música. Aquela que sempre vai te lembrar que "Eu vou estar onde você estiver"!
+        </p>
+        <div class="reveal-button-container">
+          <button id="reveal-player-btn" class="reveal-player-button">
+            <svg viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
+          </button>
+        </div>
+        <div id="player-wrapper" class="player-wrapper">
+          <div class="player-spotify-style">
+            <audio id="musica-player"></audio>
+            <div class="player-corpo">
+              <img src="https://i.scdn.co/image/ab67616d00001e0209db791ec9bc25a6b4151588" alt="Capa do Álbum" class="album-art">
+              <div class="player-ui">
+                <div class="track-info">
+                  <h3 id="track-title">Religião</h3>
+                  <p id="track-artist">Jão</p>
+                </div>
+                <div class="player-timeline">
+                  <div class="progress-bar-container">
+                    <div id="progress-bar"></div>
+                  </div>
+                  <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span id="total-duration">0:00</span>
+                  </div>
+                </div>
+                <div class="player-controles">
+                  <button id="prev-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
+                  <button id="play-pause-btn" class="control-btn play-btn">
+                    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5 L18 12 L8 19 Z"></path></svg>
+                    <svg id="pause-icon" style="display: none;" viewBox="0 0 24 24"><path d="M9 5 V19 M15 5 V19"></path></svg>
+                  </button>
+                  <button id="next-btn" class="control-btn"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6z"></path></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Feito com ❤️ para a pessoa que torna meus dias melhores.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
