@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // BLOCO 2: LÓGICA DO SLIDESHOW DA GALERIA
     // ======================================================
     const galeriaDeFotos = [
-        "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg",
+        "imagens/1.jpg", "imagens/2.jpg", "imagens/3.jpg", "imagens/4.jpg", "imagens/5.jpg", "imagens/6.jpg", "imagens/7_b.jpg", "imagens/8.jpg", "imagens/9.jpg", "imagens/10.jpg", "imagens/11.jpg", "imagens/12.jpg", "imagens/13.jpg", "imagens/14.jpg", "imagens/15.jpg", "imagens/16.jpg", "imagens/17.jpg", "imagens/18.jpg", "imagens/19.jpg", "imagens/20.jpg", "imagens/21.jpg", "imagens/22.jpg", "imagens/23.jpg", "imagens/24.jpg", "imagens/25.jpg", "imagens/26.jpg",
     ];
 
     function shuffleArray(array) {
