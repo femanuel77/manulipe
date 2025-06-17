@@ -220,13 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
         revealContainer.style.display = 'none';
         }, { once: true });
     }
+    
     // ======================================================
     // BLOCO 6: LÓGICA DO PLAYER DE VÍDEO CUSTOMIZADO
     // ======================================================
     const videoContainer = document.getElementById('video-player-container');
     const video = document.getElementById('custom-video');
-    const videoPlayPauseBtn = document.getElementById('video-play-pause-btn'); // Botão pequeno
-    const centralPlayBtn = document.getElementById('video-central-play-btn'); // Botão central
+    const videoPlayPauseBtn = document.getElementById('video-play-pause-btn');
+    const centralPlayBtn = document.getElementById('video-central-play-btn');
     const videoPlayIcon = document.getElementById('video-play-icon');
     const videoPauseIcon = document.getElementById('video-pause-icon');
     const videoProgressBar = document.getElementById('video-progress-bar');
@@ -236,24 +237,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (video) {
         const toggleVideoPlay = () => {
-            if (video.paused) {
+            if (video.paused || video.ended) {
                 video.play();
             } else {
                 video.pause();
             }
         };
 
-        video.addEventListener('play', () => {
-            videoContainer.classList.add('playing');
-            videoPlayIcon.style.display = 'none';
-            videoPauseIcon.style.display = 'block';
-        });
-
-        video.addEventListener('pause', () => {
-            videoContainer.classList.remove('playing');
-            videoPlayIcon.style.display = 'block';
-            videoPauseIcon.style.display = 'none';
-        });
+        const updatePlayPauseIcon = () => {
+            if (video.paused || video.ended) {
+                videoContainer.classList.remove('playing');
+                videoPlayIcon.style.display = 'block';
+                videoPauseIcon.style.display = 'none';
+            } else {
+                videoContainer.classList.add('playing');
+                videoPlayIcon.style.display = 'none';
+                videoPauseIcon.style.display = 'block';
+            }
+        };
 
         const formatVideoTime = (timeInSeconds) => {
             const minutes = Math.floor(timeInSeconds / 60);
@@ -275,17 +276,32 @@ document.addEventListener('DOMContentLoaded', () => {
             video.currentTime = (videoProgressBar.value / 100) * video.duration;
         };
 
+        // FUNÇÃO DE TELA CHEIA ATUALIZADA
         const toggleFullscreen = () => {
-            if (!document.fullscreenElement) {
-                videoContainer.requestFullscreen().catch(err => {
-                    alert(`Erro ao tentar entrar em tela cheia: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            // Se já está em tela cheia, sai
+            if (document.exitFullscreen) {
+            document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
             }
+        } else {
+            // Se não está, entra em tela cheia
+            // Tenta primeiro o método específico do iOS para vídeos
+            if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen();
+            } else if (videoContainer.requestFullscreen) { // Fallback para outros navegadores
+            videoContainer.requestFullscreen();
+            } else if (videoContainer.webkitRequestFullscreen) { /* Safari fallback */
+            videoContainer.webkitRequestFullscreen();
+            }
+        }
         };
 
         // Event Listeners
+        video.addEventListener('play', updatePlayPauseIcon);
+        video.addEventListener('pause', updatePlayPauseIcon);
+        video.addEventListener('ended', updatePlayPauseIcon);
         if(videoPlayPauseBtn) videoPlayPauseBtn.addEventListener('click', toggleVideoPlay);
         if(centralPlayBtn) centralPlayBtn.addEventListener('click', toggleVideoPlay);
         video.addEventListener('click', toggleVideoPlay);
