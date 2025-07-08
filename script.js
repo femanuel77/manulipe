@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     // BLOCO 1: LÓGICA DO CONTADOR DE TEMPO
     // ======================================================
-    const dataInicio = new Date('2024-07-07T15:00:00');
+    const dataInicio = new Date('2024-07-08T15:00:00');
     const spanAnos = document.getElementById('anos');
     const spanMeses = document.getElementById('meses');
     const spanDias = document.getElementById('dias');
